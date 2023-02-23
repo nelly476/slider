@@ -1,0 +1,32 @@
+input[type="number"] {
+  width: 5em;
+}
+
+.range-group-contracts,
+.range-group-works,
+.final-price-section {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5em;
+  margin: 0 auto;
+  margin-bottom: 3em;
+}
+
+.label-number-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.range-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+input[type="range"] {
+  width: 80%;
+}
+
+.final-price-section {
+  text-align: center;
+}

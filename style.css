@@ -5,7 +5,7 @@
 
 .range-group,
 .final-price-section {
-  width: 25%;
+  width: 20%;
   display: flex;
   flex-direction: column;
   row-gap: 0.5em;
@@ -43,7 +43,7 @@ input[type="number"] {
 }
 
 .range-wrap {
-  width: 80%;
+  width: 70%;
   position: relative;
   margin: 0 auto 3rem;
 }
@@ -54,6 +54,7 @@ input[type="number"] {
   background: #151515;
   color: white;
   padding: 4px 12px;
+  /* min-height: 29px; */
   position: absolute;
   border-radius: 4px;
   left: 50%;
@@ -71,4 +72,8 @@ input[type="number"] {
 
 body {
   margin: 2rem;
+}
+
+.display-none {
+  display: none;
 }

@@ -1,34 +1,30 @@
-const contractNumberInput = document.getElementById("contractNumberInput");
-const contractRangeInput = document.getElementById("contractRangeInput");
-const workNumberInput = document.getElementById("workNumberInput");
-const workRangeInput = document.getElementById("workRangeInput");
-
-contractRangeInput.oninput = (e) => {
-  contractNumberInput.value = e.target.value;
-};
-
-contractNumberInput.oninput = (e) => {
-  contractRangeInput.value = e.target.value;
-};
-
-workRangeInput.oninput = (e) => {
-  workNumberInput.value = e.target.value;
-};
-
-workNumberInput.oninput = (e) => {
-  workRangeInput.value = e.target.value;
-};
-
-const allRanges = document.querySelectorAll(".range-wrap");
+const allRanges = document.querySelectorAll(".range-group");
 
 allRanges.forEach((wrap) => {
   const range = wrap.querySelector(".range");
   const bubble = wrap.querySelector(".bubble");
+  const number = wrap.querySelector(".range-value");
 
   range.addEventListener("input", () => {
     setBubble(range, bubble);
+    number.value = range.value;
   });
+
+  number.addEventListener("input", () => {
+    if (number.value.length === 0) {
+      bubble.classList.add("display-none");
+    } else {
+      bubble.classList.remove("display-none");
+      setBubble(number, bubble);
+      range.value = number.value;
+    }
+  });
+
   setBubble(range, bubble);
+
+  // range.addEventListener("click", () => {
+  //   console.log(number.value.length === 0);
+  // });
 });
 
 function setBubble(range, bubble) {

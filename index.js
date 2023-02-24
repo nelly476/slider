@@ -15,8 +15,8 @@ allRanges.forEach((wrap) => {
       bubble.classList.add("display-none");
     } else {
       bubble.classList.remove("display-none");
-      setBubble(number, bubble);
       range.value = number.value;
+      setBubble(range, bubble);
     }
   });
 

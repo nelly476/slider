@@ -9,9 +9,10 @@
     <script src="index.js" defer></script>
   </head>
   <body>
-    <div class="range-group-contracts">
+    <div class="range-group">
       <div class="label-number-section">
         <label for="contractRangeInput"> Contracts </label>
+
         <input
           tabindex="-1"
           value="20"
@@ -21,22 +22,26 @@
           type="number"
         />
       </div>
-      <div class="range-section">
+      <span class="range-section">
         <span>0</span>
-        <input
-          type="range"
-          id="contractRangeInput"
-          name="contractRangeInput"
-          min="0"
-          max="100"
-          value="20"
-          step="1"
-        />
+        <div class="range-wrap">
+          <input
+            type="range"
+            id="contractRangeInput"
+            name="contractRangeInput"
+            min="0"
+            max="100"
+            value="20"
+            step="1"
+            class="range"
+          />
+          <output class="bubble"></output>
+        </div>
         <span>100+</span>
-      </div>
+      </span>
     </div>
 
-    <div class="range-group-contracts">
+    <div class="range-group">
       <div class="label-number-section">
         <label for="workRangeInput"> Works </label>
         <input
@@ -48,44 +53,26 @@
           type="number"
         />
       </div>
-      <div class="range-section">
+      <span class="range-section">
         <span>0</span>
-        <input
-          type="range"
-          id="workRangeInput"
-          name="workRangeInput"
-          min="0"
-          max="10000"
-          value="500"
-          step="1"
-        />
+        <div class="range-wrap">
+          <input
+            type="range"
+            id="workRangeInput"
+            name="workRangeInput"
+            min="0"
+            max="10000"
+            value="500"
+            step="1"
+            class="range"
+          />
+          <output class="bubble"></output>
+        </div>
         <span>10000+</span>
-      </div>
+      </span>
     </div>
     <div class="final-price-section">
       <p>Start from $<span id="finalPrice">25</span> per month</p>
     </div>
   </body>
 </html>
-
-<!-- <div class="range-group-contracts">
-    <input
-      tabindex="-1"
-      value="20"
-      aria-hidden="true"
-      class="range-value"
-      id="contractNumberInput"
-    />
-    <div>
-      <label for="contractRangeInput"> Contracts </label>
-      <input
-        type="range"
-        id="contractRangeInput"
-        name="contractRangeInput"
-        min="0"
-        max="100"
-        value="20"
-        step="1"
-      />
-    </div>
-  </div> -->

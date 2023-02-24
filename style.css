@@ -1,9 +1,9 @@
-input[type="number"] {
-  width: 5em;
+.label-number-section {
+  display: flex;
+  justify-content: space-between;
 }
 
-.range-group-contracts,
-.range-group-works,
+.range-group,
 .final-price-section {
   width: 25%;
   display: flex;
@@ -13,20 +13,62 @@ input[type="number"] {
   margin-bottom: 3em;
 }
 
-.label-number-section {
-  display: flex;
-  justify-content: space-between;
+.final-price-section {
+  text-align: center;
+}
+
+.range-value {
+  width: 5em;
+  border: none;
+}
+
+/* Hiding arrows for Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hiding arrows for Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.range-value:focus {
+  outline: none;
 }
 
 .range-section {
   display: flex;
-  justify-content: space-between;
 }
 
-input[type="range"] {
+.range-wrap {
   width: 80%;
+  position: relative;
+  margin: 0 auto 3rem;
+}
+.range {
+  width: 100%;
+}
+.bubble {
+  background: #151515;
+  color: white;
+  padding: 4px 12px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.bubble::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 10px;
+  background: #151515;
+  top: -1px;
+  left: 50%;
 }
 
-.final-price-section {
-  text-align: center;
+body {
+  margin: 2rem;
 }

@@ -22,6 +22,22 @@ allRanges.forEach((wrap) => {
   });
 
   setBubble(range, bubble);
+
+  // Functions for progress bar to work
+
+  range.style.setProperty("--value", range.value);
+  range.style.setProperty("--min", range.min == "" ? "0" : range.min);
+  range.style.setProperty("--max", range.max == "" ? "100" : range.max);
+  range.addEventListener("input", () =>
+    range.style.setProperty("--value", range.value)
+  );
+
+  number.style.setProperty("--value", number.value);
+  number.style.setProperty("--min", number.min == "" ? "0" : number.min);
+  number.style.setProperty("--max", number.max == "" ? "100" : number.max);
+  number.addEventListener("input", () =>
+    range.style.setProperty("--value", number.value)
+  );
 });
 
 function setBubble(range, bubble) {
@@ -32,22 +48,4 @@ function setBubble(range, bubble) {
   bubble.innerHTML = val;
 
   bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
-}
-
-// Functions for progress bar to work
-
-for (let e of document.querySelectorAll(
-  'input[type="range"].slider-progress'
-)) {
-  e.style.setProperty("--value", e.value);
-  e.style.setProperty("--min", e.min == "" ? "0" : e.min);
-  e.style.setProperty("--max", e.max == "" ? "100" : e.max);
-  e.addEventListener("input", () => e.style.setProperty("--value", e.value));
-}
-
-for (let e of document.querySelectorAll('input[type="number"].range-value')) {
-  e.style.setProperty("--value", e.value);
-  e.style.setProperty("--min", e.min == "" ? "0" : e.min);
-  e.style.setProperty("--max", e.max == "" ? "100" : e.max);
-  e.addEventListener("input", () => e.style.setProperty("--value", e.value));
 }

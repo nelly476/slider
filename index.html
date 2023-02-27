@@ -4,78 +4,155 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Price Slider</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="site.css" />
     <script src="index.js" defer></script>
   </head>
   <body>
-    <div class="range-group">
-      <div class="label-number-section">
-        <label for="contractRangeInput">Contracts</label>
-        <input
-          tabindex="-1"
-          value="20"
-          min="0"
-          max="2000"
-          aria-hidden="true"
-          class="range-value"
-          id="contractNumberInput"
-          type="number"
-        />
-      </div>
-      <span class="range-section">
-        <p>0</p>
-        <div class="range-wrap">
-          <input
-            type="range"
-            id="contractRangeInput"
-            name="contractRangeInput"
-            min="0"
-            max="100"
-            value="20"
-            step="1"
-            class="range styled-slider slider-progress"
-          />
-          <output class="bubble"></output>
+    <header>
+      <h1>Price Slider</h1>
+      <p>Helps to calculate monthly price for the service based on the usage</p>
+    </header>
+
+    <div class="slider-container">
+      <div
+        id="w-node-_073d0351-16c0-f174-58a8-8de3383df2c0-7374239d"
+        data-w-id="073d0351-16c0-f174-58a8-8de3383df2c0"
+        style="
+          opacity: 1;
+          transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg)
+            rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+          transform-style: preserve-3d;
+        "
+        class="pricing-v1-card">
+        <div class="title gradient">DETAILS</div>
+        <h3>Publishing Lite</h3>
+        <div class="pricing-features">
+          <div class="pricing-feature">
+            <div class="pricing-feature-icon"></div>
+            <div>Starts at £20/month</div>
+          </div>
+          <div class="pricing-feature">
+            <div class="pricing-feature-icon"></div>
+            <div>Easily Manage Royalties</div>
+          </div>
+          <div class="pricing-feature">
+            <div class="pricing-feature-icon"></div>
+            <div>Ingest Revenues from Any Source</div>
+          </div>
+          <div class="pricing-feature">
+            <div class="pricing-feature-icon"></div>
+            <div>Generate Easily Understandable Statements</div>
+            <div class="info">
+              <div class="info-icon hidden"></div>
+              <div
+                class="tooltip hidden"
+                style="
+                  display: none;
+                  transform: translate3d(0px, 4px, 0px) scale3d(1, 1, 1)
+                    rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+                  transform-style: preserve-3d;
+                  opacity: 0;
+                ">
+                <div>
+                  Writing result-oriented ad copy is difficult, as it must
+                  appeal to, entice, and convince consumers to take action.
+                </div>
+                <div class="tooltip-arrow"></div>
+              </div>
+            </div>
+          </div>
+          <div class="pricing-feature">
+            <div class="pricing-feature-icon"></div>
+            <div>Analytics and Reports</div>
+          </div>
+          <div class="pricing-feature">
+            <div class="pricing-feature-icon"></div>
+            <div>Composer Dashboard</div>
+          </div>
         </div>
-        <p>100+</p>
-      </span>
+        <div class="price-container">
+          <div class="range-group">
+            <div class="label-number-section">
+              <label for="contractRangeInput">Contracts</label>
+              <input
+                tabindex="-1"
+                value="20"
+                min="0"
+                max="2000"
+                aria-hidden="true"
+                class="range-value"
+                id="contractNumberInput"
+                type="number" />
+            </div>
+            <span class="range-section">
+              <p>0</p>
+              <div class="range-wrap">
+                <input
+                  type="range"
+                  id="contractRangeInput"
+                  name="contractRangeInput"
+                  min="0"
+                  max="100"
+                  value="20"
+                  step="1"
+                  class="range styled-slider slider-progress" />
+                <output class="bubble"></output>
+              </div>
+              <p>100+</p>
+            </span>
+          </div>
+          <div class="range-group">
+            <div class="label-number-section">
+              <label for="workRangeInput"> Works </label>
+              <input
+                tabindex="-1"
+                value="500"
+                min="0"
+                max="20000"
+                aria-hidden="true"
+                class="range-value"
+                id="workNumberInput"
+                type="number" />
+            </div>
+            <span class="range-section">
+              <p>0</p>
+              <div class="range-wrap">
+                <input
+                  type="range"
+                  id="workRangeInput"
+                  name="workRangeInput"
+                  min="0"
+                  max="10000"
+                  value="500"
+                  step="1"
+                  class="range styled-slider slider-progress" />
+                <output class="bubble"></output>
+              </div>
+              <p>10000+</p>
+            </span>
+          </div>
+          <div class="pricing-v1-billing startsfrom">STARTS&nbsp;FROM</div>
+          <div class="pricing-v1-tag">£20</div>
+          <div class="pricing-v1-billing">PER&nbsp;Month</div>
+        </div>
+        <a
+          href="https://github.com/nelly476"
+          target="_blank"
+          class="button w-button"
+          >Start free trial</a
+        >
+      </div>
     </div>
 
-    <div class="range-group">
-      <div class="label-number-section">
-        <label for="workRangeInput"> Works </label>
-        <input
-          tabindex="-1"
-          value="500"
-          min="0"
-          max="20000"
-          aria-hidden="true"
-          class="range-value"
-          id="workNumberInput"
-          type="number"
-        />
-      </div>
-      <span class="range-section">
-        <p>0</p>
-        <div class="range-wrap">
-          <input
-            type="range"
-            id="workRangeInput"
-            name="workRangeInput"
-            min="0"
-            max="10000"
-            value="500"
-            step="1"
-            class="range styled-slider slider-progress"
-          />
-          <output class="bubble"></output>
-        </div>
-        <p>10000+</p>
-      </span>
-    </div>
-    <div class="final-price-section">
-      <p>Start from $<span id="finalPrice">25</span> per month</p>
-    </div>
+    <footer>
+      Coded by <a href="https://github.com/nelly476" target="_blank">Nelly</a>.
+    </footer>
   </body>
 </html>

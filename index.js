@@ -29,6 +29,11 @@ allRanges.forEach((wrap) => {
       setBubble(number, bubble);
       range.value = number.value;
     }
+    if (number.classList.contains("contracts") && number.value > 500) {
+      number.value = 500;
+    } else if (number.classList.contains("catalogues") && number.value > 3000) {
+      number.value = 3000;
+    }
   });
 
   setBubble(range, bubble);
@@ -66,6 +71,7 @@ function setBubble(range, bubble) {
   bubble.innerText = formatter.format(val);
 
   bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+
   setTimeout(() => {
     bubble.classList.add("display-none");
   }, "1000");

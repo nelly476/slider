@@ -87,7 +87,7 @@
               <label for="contractRangeInput">Contracts</label>
               <input
                 tabindex="-1"
-                value="20"
+                value="15"
                 min="0"
                 max="100"
                 aria-hidden="true"
@@ -105,7 +105,7 @@
                   name="contractRangeInput"
                   min="0"
                   max="100"
-                  value="20"
+                  value="15"
                   step="1"
                   class="range styled-slider slider-progress"
                 />
@@ -116,15 +116,15 @@
           </div>
           <div class="range-group">
             <div class="label-number-section">
-              <label for="workRangeInput"> Works </label>
+              <label for="CatalogueRangeInput"> Catalogues </label>
               <input
                 tabindex="-1"
-                value="500"
+                value="100"
                 min="0"
-                max="20000"
+                max="1000"
                 aria-hidden="true"
                 class="range-value"
-                id="workNumberInput"
+                id="CatalogueNumberInput"
                 type="number"
               />
             </div>
@@ -133,28 +133,24 @@
               <div class="range-wrap">
                 <input
                   type="range"
-                  id="workRangeInput"
-                  name="workRangeInput"
+                  id="CatalogueRangeInput"
+                  name="CatalogueRangeInput"
                   min="0"
-                  max="10000"
-                  value="500"
+                  max="1000"
+                  value="100"
                   step="1"
                   class="range styled-slider slider-progress"
                 />
                 <output class="bubble"></output>
               </div>
-              <p>10000+</p>
+              <p>1000+</p>
             </span>
           </div>
           <div class="pricing-v1-billing startsfrom">STARTS&nbsp;FROM</div>
-          <div class="pricing-v1-tag">£20</div>
+          <div class="pricing-v1-tag" id="finalPrice">£20</div>
           <div class="pricing-v1-billing">PER&nbsp;Month</div>
         </div>
-        <div>
-          <input id="size" type="number" />
-          <input id="contracts" type="number" />
-          <p id="result">0.00</p>
-        </div>
+
         <a
           href="https://github.com/nelly476"
           target="_blank"

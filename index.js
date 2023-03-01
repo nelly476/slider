@@ -9,6 +9,7 @@ allRanges.forEach((wrap) => {
     setBubble(range, bubble);
     number.value = range.value;
     bubble.classList.remove("display-none");
+    modifyPrice();
   });
 
   number.addEventListener("input", () => {
@@ -16,9 +17,9 @@ allRanges.forEach((wrap) => {
       bubble.classList.add("display-none");
     } else {
       bubble.classList.remove("display-none");
-
       setBubble(number, bubble);
       range.value = number.value;
+      modifyPrice();
     }
   });
 
@@ -45,6 +46,8 @@ function setBubble(range, bubble) {
   const val = range.value;
   const min = range.min ? range.min : 0;
   const max = range.max ? range.max : 100;
+  let formatter = Intl.NumberFormat("en-GB", { notation: "compact" });
+
   let newVal;
   if (Number(val) > Number(max)) {
     newVal = Number(((max - min) * 100) / (max - min));
@@ -52,7 +55,35 @@ function setBubble(range, bubble) {
     newVal = Number(((val - min) * 100) / (max - min));
   }
 
-  bubble.innerHTML = val;
+  bubble.innerText = formatter.format(val);
 
   bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+}
+
+function modifyPrice() {
+  const contracts = document.getElementById("contractNumberInput");
+  const catalogues = document.getElementById("CatalogueNumberInput");
+  const finalPrice = document.getElementById("finalPrice");
+
+  const BASE_PRICE = 20;
+  const BASE_CONTRACTS = 15;
+  const BASE_CATALOGUES = 100;
+
+  const contractsNumber = Number(contracts.value);
+  const cataloguesNumber = Number(catalogues.value);
+
+  const contractsIncrements = (contractsNumber - 1) / BASE_CONTRACTS;
+  const cataloguesIncrements = (cataloguesNumber - 1) / BASE_CATALOGUES;
+
+  const resultPrice =
+    (1 + Math.floor(cataloguesIncrements) + Math.floor(contractsIncrements)) *
+    BASE_PRICE;
+
+  const resultPriceFormatted = new Intl.NumberFormat("en-GB", {
+    style: "currency",
+    currency: "GBP",
+    maximumFractionDigits: 0,
+  }).format(resultPrice);
+
+  finalPrice.innerText = resultPrice > 20 ? resultPriceFormatted : "£20";
 }

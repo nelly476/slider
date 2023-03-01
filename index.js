@@ -16,8 +16,9 @@ allRanges.forEach((wrap) => {
       bubble.classList.add("display-none");
     } else {
       bubble.classList.remove("display-none");
+
+      setBubble(number, bubble);
       range.value = number.value;
-      setBubble(range, bubble);
     }
   });
 
@@ -44,7 +45,13 @@ function setBubble(range, bubble) {
   const val = range.value;
   const min = range.min ? range.min : 0;
   const max = range.max ? range.max : 100;
-  const newVal = Number(((val - min) * 100) / (max - min));
+  let newVal;
+  if (Number(val) > Number(max)) {
+    newVal = Number(((max - min) * 100) / (max - min));
+  } else {
+    newVal = Number(((val - min) * 100) / (max - min));
+  }
+
   bubble.innerHTML = val;
 
   bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;

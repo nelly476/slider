@@ -107,6 +107,7 @@ input[type="number"] {
 
 .range-section {
   display: flex;
+  justify-content: flex-start;
 }
 
 .range-section p {
@@ -115,9 +116,9 @@ input[type="number"] {
 }
 
 .range-wrap {
-  width: 70%;
+  width: 90%;
   position: relative;
-  margin: 0 auto 3rem;
+  margin-bottom: 3rem;
 }
 .range {
   width: 100%;

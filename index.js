@@ -23,6 +23,14 @@ allRanges.forEach((wrap) => {
     }
   });
 
+  number.addEventListener("focusout", () => {
+    if (number.value == 0 || number.value == isNaN()) {
+      number.value = 1;
+      setBubble(number, bubble);
+      range.value = number.value;
+    }
+  });
+
   setBubble(range, bubble);
 
   // Functions for progress bar to work
@@ -58,6 +66,9 @@ function setBubble(range, bubble) {
   bubble.innerText = formatter.format(val);
 
   bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+  setTimeout(() => {
+    bubble.classList.add("display-none");
+  }, "1000");
 }
 
 function modifyPrice() {

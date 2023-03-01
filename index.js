@@ -24,7 +24,7 @@ allRanges.forEach((wrap) => {
   });
 
   number.addEventListener("focusout", () => {
-    if (number.value == 0 || number.value == isNaN()) {
+    if (number.value <= 0 || number.value == isNaN()) {
       number.value = 1;
       setBubble(number, bubble);
       range.value = number.value;

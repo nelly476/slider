@@ -8,22 +8,39 @@ allRanges.forEach((wrap) => {
   range.addEventListener("input", () => {
     setBubble(range, bubble);
     number.value = range.value;
-    bubble.classList.remove("display-none");
     modifyPrice();
   });
 
-  number.addEventListener("input", () => {
-    if (number.value.length === 0) {
-      bubble.classList.add("display-none");
-    } else {
-      bubble.classList.remove("display-none");
+  // Using focusout for price change
+  number.addEventListener("focusout", () => {
+    if (number.value.length > 0) {
+      range.value = number.value;
+      setBubble(range, bubble);
+      modifyPrice();
+    }
+
+    if (number.value <= 0 || number.value == isNaN()) {
+      number.value = 1;
       setBubble(number, bubble);
       range.value = number.value;
-      modifyPrice();
+    }
+    if (number.classList.contains("contracts") && number.value > 500) {
+      number.value = 500;
+    } else if (number.classList.contains("catalogues") && number.value > 3000) {
+      number.value = 3000;
     }
   });
 
-  number.addEventListener("focusout", () => {
+  // Allowing users to click enter to update prices
+  number.addEventListener("keypress", (e) => {
+    if (e.key !== 'Enter') return;
+
+    if (number.value.length > 0) {
+      range.value = number.value;
+      setBubble(range, bubble);
+      modifyPrice();
+    }
+
     if (number.value <= 0 || number.value == isNaN()) {
       number.value = 1;
       setBubble(number, bubble);
@@ -50,8 +67,11 @@ allRanges.forEach((wrap) => {
   number.style.setProperty("--value", number.value);
   number.style.setProperty("--min", number.min == "" ? "0" : number.min);
   number.style.setProperty("--max", number.max == "" ? "100" : number.max);
-  number.addEventListener("input", () =>
-    range.style.setProperty("--value", number.value)
+  number.addEventListener("focusout", (e) =>
+    range.style.setProperty("--value", Math.max(number.value, Number(e.target.min)))
+  );
+  number.addEventListener("keypress", (e) => e.key === 'Enter' && 
+    range.style.setProperty("--value", Math.max(number.value, Number(e.target.min)))
   );
 });
 
@@ -59,6 +79,7 @@ function setBubble(range, bubble) {
   const val = range.value;
   const min = range.min ? range.min : 0;
   const max = range.max ? range.max : 100;
+  const SLIDER_THUMB_WIDTH = 12;              // Width of the thumb
   let formatter = Intl.NumberFormat("en-GB", { notation: "compact" });
 
   let newVal;
@@ -70,11 +91,13 @@ function setBubble(range, bubble) {
 
   bubble.innerText = formatter.format(val);
 
-  bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+  // Left offset for the bubble, when at 0%
+  const offset = `${SLIDER_THUMB_WIDTH / 2}px`;
 
-  setTimeout(() => {
-    bubble.classList.add("display-none");
-  }, "1000");
+  // Calculating inner width (track) in percents
+  const innerWidth = `100% - ${SLIDER_THUMB_WIDTH}px`;
+
+  bubble.style.left = `calc(${offset} + ((${innerWidth}) * ${newVal / 100}))`;
 }
 
 function modifyPrice() {

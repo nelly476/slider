@@ -11,18 +11,18 @@ allRanges.forEach((wrap) => {
   const EXTENDED_TIMEOUT_TIME = 2000; // in milliseconds
 
   const handleNumberChange = () => {
-    const value = Number(number.value || number.min)
+    const value = Number(number.value || number.min);
     if (isNaN(value)) value = number.min;
 
-    const roundedNumber = Math.round(value / step + 0.5) * step;
-    
+    const roundedNumber = Math.cell(value / step) * step;
+
     number.value = Math.max(number.min, Math.min(number.max, roundedNumber));
     range.value = number.value;
-    range.style.setProperty("--value", number.value)
-    
+    range.style.setProperty("--value", number.value);
+
     setBubble(range, bubble);
     modifyPrice();
-  }
+  };
 
   range.addEventListener("input", () => {
     setBubble(range, bubble);
@@ -30,30 +30,33 @@ allRanges.forEach((wrap) => {
     modifyPrice();
   });
 
-  number.addEventListener('input', () => {
+  number.addEventListener("input", () => {
     clearTimeout(numberChangeTimeout);
 
     numberChangeTimeout = setTimeout(
-      handleNumberChange, 
-      Number(number.value) <= Math.max(Number(number.min), Number(number.step || 1)) 
-        ? EXTENDED_TIMEOUT_TIME 
+      handleNumberChange,
+      Number(number.value) <=
+        Math.max(Number(number.min), Number(number.step || 1))
+        ? EXTENDED_TIMEOUT_TIME
         : TIMEOUT_TIME
     );
-  })
+  });
 
-  number.addEventListener('keypress', (e) => {
+  number.addEventListener("keypress", (e) => {
     clearTimeout(numberChangeTimeout);
 
-    if (e.key === 'Enter') // Bypass waiting time on enter key press
-      return handleNumberChange(); 
+    if (e.key === "Enter")
+      // Bypass waiting time on enter key press
+      return handleNumberChange();
 
     numberChangeTimeout = setTimeout(
-      handleNumberChange, 
-      Number(number.value) <= Math.max(Number(number.min), Number(number.step || 1)) 
-        ? EXTENDED_TIMEOUT_TIME 
+      handleNumberChange,
+      Number(number.value) <=
+        Math.max(Number(number.min), Number(number.step || 1))
+        ? EXTENDED_TIMEOUT_TIME
         : TIMEOUT_TIME
     );
-  })
+  });
 
   setBubble(range, bubble);
 
@@ -75,7 +78,7 @@ function setBubble(range, bubble) {
   const val = range.value;
   const min = range.min ? range.min : 0;
   const max = range.max ? range.max : 100;
-  const SLIDER_THUMB_WIDTH = 12;              // Width of the thumb
+  const SLIDER_THUMB_WIDTH = 12; // Width of the thumb
   let formatter = Intl.NumberFormat("en-GB", { notation: "compact" });
 
   let newVal;
@@ -111,9 +114,12 @@ function modifyPrice() {
   const contractsIncrements = (contractsNumber - 1) / BASE_CONTRACTS;
   const cataloguesIncrements = (cataloguesNumber - 1) / BASE_CATALOGUES;
 
-  const resultPrice =
-    (1 + Math.floor(cataloguesIncrements) + Math.floor(contractsIncrements)) *
-    BASE_PRICE;
+  const priceIncrement =
+    contractsIncrements > cataloguesIncrements
+      ? contractsIncrements
+      : cataloguesIncrements;
+
+  const resultPrice = (1 + Math.floor(priceIncrement)) * BASE_PRICE;
 
   const resultPriceFormatted = new Intl.NumberFormat("en-GB", {
     style: "currency",

@@ -4,6 +4,25 @@ allRanges.forEach((wrap) => {
   const range = wrap.querySelector(".range");
   const bubble = wrap.querySelector(".bubble");
   const number = wrap.querySelector(".range-value");
+  const step = Number(range.step);
+
+  let numberChangeTimeout = null;
+  const TIMEOUT_TIME = 200; // in milliseconds
+  const EXTENDED_TIMEOUT_TIME = 2000; // in milliseconds
+
+  const handleNumberChange = () => {
+    const value = Number(number.value || number.min)
+    if (isNaN(value)) value = number.min;
+
+    const roundedNumber = Math.round(value / step + 0.5) * step;
+    
+    number.value = Math.max(number.min, Math.min(number.max, roundedNumber));
+    range.value = number.value;
+    range.style.setProperty("--value", number.value)
+    
+    setBubble(range, bubble);
+    modifyPrice();
+  }
 
   range.addEventListener("input", () => {
     setBubble(range, bubble);
@@ -11,47 +30,30 @@ allRanges.forEach((wrap) => {
     modifyPrice();
   });
 
-  // Using focusout for price change
-  number.addEventListener("focusout", () => {
-    if (number.value.length > 0) {
-      range.value = number.value;
-      setBubble(range, bubble);
-      modifyPrice();
-    }
+  number.addEventListener('input', () => {
+    clearTimeout(numberChangeTimeout);
 
-    if (number.value <= 0 || number.value == isNaN()) {
-      number.value = 1;
-      setBubble(number, bubble);
-      range.value = number.value;
-    }
-    if (number.classList.contains("contracts") && number.value > 500) {
-      number.value = 500;
-    } else if (number.classList.contains("catalogues") && number.value > 3000) {
-      number.value = 3000;
-    }
-  });
+    numberChangeTimeout = setTimeout(
+      handleNumberChange, 
+      Number(number.value) <= Math.max(Number(number.min), Number(number.step || 1)) 
+        ? EXTENDED_TIMEOUT_TIME 
+        : TIMEOUT_TIME
+    );
+  })
 
-  // Allowing users to click enter to update prices
-  number.addEventListener("keypress", (e) => {
-    if (e.key !== 'Enter') return;
+  number.addEventListener('keypress', (e) => {
+    clearTimeout(numberChangeTimeout);
 
-    if (number.value.length > 0) {
-      range.value = number.value;
-      setBubble(range, bubble);
-      modifyPrice();
-    }
+    if (e.key === 'Enter') // Bypass waiting time on enter key press
+      return handleNumberChange(); 
 
-    if (number.value <= 0 || number.value == isNaN()) {
-      number.value = 1;
-      setBubble(number, bubble);
-      range.value = number.value;
-    }
-    if (number.classList.contains("contracts") && number.value > 500) {
-      number.value = 500;
-    } else if (number.classList.contains("catalogues") && number.value > 3000) {
-      number.value = 3000;
-    }
-  });
+    numberChangeTimeout = setTimeout(
+      handleNumberChange, 
+      Number(number.value) <= Math.max(Number(number.min), Number(number.step || 1)) 
+        ? EXTENDED_TIMEOUT_TIME 
+        : TIMEOUT_TIME
+    );
+  })
 
   setBubble(range, bubble);
 
@@ -64,15 +66,9 @@ allRanges.forEach((wrap) => {
     range.style.setProperty("--value", range.value)
   );
 
-  number.style.setProperty("--value", number.value);
+  number.style.setProperty("--value", Math.round(number.value / step) * step);
   number.style.setProperty("--min", number.min == "" ? "0" : number.min);
   number.style.setProperty("--max", number.max == "" ? "100" : number.max);
-  number.addEventListener("focusout", (e) =>
-    range.style.setProperty("--value", Math.max(number.value, Number(e.target.min)))
-  );
-  number.addEventListener("keypress", (e) => e.key === 'Enter' && 
-    range.style.setProperty("--value", Math.max(number.value, Number(e.target.min)))
-  );
 });
 
 function setBubble(range, bubble) {

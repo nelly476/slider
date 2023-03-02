@@ -14,7 +14,7 @@ allRanges.forEach((wrap) => {
     const value = Number(number.value || number.min)
     if (isNaN(value)) value = number.min;
 
-    const roundedNumber = Math.round(value / step) * step;
+    const roundedNumber = Math.round(value / step + 0.5) * step;
     
     number.value = Math.max(number.min, Math.min(number.max, roundedNumber));
     range.value = number.value;

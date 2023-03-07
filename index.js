@@ -106,7 +106,7 @@ function modifyPrice() {
 
   const BASE_PRICE = 20;
   const BASE_CONTRACTS = 15;
-  const BASE_CATALOGUES = 100;
+  const BASE_CATALOGUES = 300;
 
   const contractsNumber = Number(contracts.value);
   const cataloguesNumber = Number(catalogues.value);

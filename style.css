@@ -74,6 +74,8 @@ footer a {
 .label-number-section {
   display: flex;
   justify-content: space-between;
+
+  gap: 1em;
 }
 
 .range-group {
@@ -86,7 +88,7 @@ footer a {
 }
 
 .range-value {
-  /* width: 5em; */
+  width: 100%;
   border: none;
   color: #7f62a5;
 
